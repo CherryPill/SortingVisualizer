@@ -19,8 +19,9 @@ public class Model {
     private final mainFrame mvcFrame;
     private int shapesMargin = 10;
     private final int maxSize = 60;
-    private final int constYOffset = mainFrame.windowHeight/2;
-    
+    private final int minSize = 10;
+    private final int constYOffset = 60;
+   
     public void sortWrapper(int index, int direction) {
             switch(index) {
                 case 0: {
@@ -65,7 +66,7 @@ public class Model {
     public int[] generateRandomNumbers() {
             int[] arr = new int[5];
             for(int x = 0;x<5;x++) {
-                    arr[x] = 0 + (int)(Math.random() * this.maxSize); 
+                    arr[x] = minSize + (int)(Math.random() * this.maxSize); 
                 }
             return arr;
         }

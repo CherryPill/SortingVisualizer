@@ -16,7 +16,7 @@ import java.awt.*;
 public class mainFrame extends JFrame{
     private Model model;
     public static int windowWidth = 800;
-    public static int windowHeight = 600;
+    public static int windowHeight = 200;
     private static double _getUserScreenWidth() {
             GraphicsEnvironment context = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice device = context.getDefaultScreenDevice();
@@ -39,6 +39,7 @@ public class mainFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
         setSize(windowWidth,windowHeight);
+        setResizable(false);
         double[] usrScreenDims = new double[2];
         mainFrame.centerWindow(usrScreenDims);
         setLocation((int)usrScreenDims[0], (int)usrScreenDims[1]);

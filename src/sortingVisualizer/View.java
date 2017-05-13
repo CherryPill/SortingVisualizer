@@ -21,7 +21,7 @@ public class View extends JPanel{
    
     public View(Model model) {
         this.model = model;
-        this.setLayout(new GridLayout(3,1));
+        this.setLayout(new GridLayout(1,1));
         
         
     }
