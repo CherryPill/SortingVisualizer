@@ -21,6 +21,7 @@ public class Model {
     public mainFrame getMvcFrame() {
         return mvcFrame;
     }
+    private final int maxNumOfShapes = 5;
     private int shapesMargin = 10;
     private final int maxSize = 60;
     private final int minSize = 10;
@@ -75,17 +76,10 @@ public class Model {
             return arr;
         }
     public Model() {
-        int[] randomNumbers = this.generateRandomNumbers();
-        shapes = new ArrayList<>();
-        shapes.add(new Square(constXOffset,constYOffset,randomNumbers[0],Color.CYAN));
-        shapes.add(new Square(maxSize+shapesMargin+constXOffset,constYOffset,randomNumbers[1],Color.RED));
-        shapes.add(new Square((maxSize+shapesMargin)*2+constXOffset,constYOffset,randomNumbers[2],Color.BLACK));
-        shapes.add(new Square((maxSize+shapesMargin)*3+constXOffset,constYOffset,randomNumbers[3],Color.GREEN));
-        shapes.add(new Square((maxSize+shapesMargin)*4+constXOffset,constYOffset,randomNumbers[4],Color.PINK));
-        
-        controller = new Controller(this);
         view = new View(this);
+        controller = new Controller(this);
         mvcFrame = new mainFrame(this);
+        this.generateShapes();
     }
     public View getView() {
         return view;        
@@ -96,4 +90,46 @@ public class Model {
             mvcFrame.windowWidth = width;
             mvcFrame.windowHeight = height;
         }
+    public void generateShapes(){
+        int[] randomNumbers = this.generateRandomNumbers();
+        shapes = new ArrayList<>();
+        int currentColorIndex = 0;
+        for(int x = 0;x<maxNumOfShapes;x++){
+            currentColorIndex = this.pickColor(randomNumbers[x]);
+            shapes.add(
+                    new Square(
+                            ((x==0?0:maxSize)+(x==0?0:shapesMargin))*x+constXOffset, 
+                            constYOffset, 
+                            randomNumbers[x], 
+                            view.getAvailableColors()[
+                               currentColorIndex
+                                ]
+                    )
+            );
+        }
+        view.revalidate();
+        view.repaint();
+    }
+    private int pickColor(int size){
+        int color = size % view.getMaxShapesColorNum();
+        while(isColorTaken(view.getAvailableColors()[color])){
+            size+=10;
+            color = size % view.getMaxShapesColorNum();
+        }
+        return color;
+    }
+    private boolean isColorTaken(Color color){
+        if(this.shapes != null){
+            for(Shape shape:this.shapes){
+            if(shape.shapeColor.equals(color)){
+                return true;
+            }
+        }
+        return false;
+        }
+        else {
+            return false;
+        }
+      
+    }
 }

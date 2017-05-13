@@ -22,8 +22,10 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
         Color.ORANGE,
         Color.GREEN
     };
+    JButton buttonGenerateNewShapes;
     JPanel upperPanel;
     JPanel lowerPanel;
+    JPanel muchLowerPanel;
     Model model;
     JComboBox sortDirCombo;
     JComboBox sortCombo;
@@ -48,13 +50,14 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
     public controlPanel(Model model) {
         this.upperPanel = new JPanel();
         this.lowerPanel = new JPanel();
-        
+        this.muchLowerPanel = new JPanel();
+        this.buttonGenerateNewShapes = new JButton("Generate new shapes");
         this.model = model;
         sortCombo = new JComboBox();
         sortDirCombo = new JComboBox();
         sortDirLabel = new JLabel("Direction");
         currentSortingState = new JLabel(this.sortStates[0]);
-        currentSortingState.setFont(new Font("Sans-Serif", Font.PLAIN, 34));
+        currentSortingState.setFont(new Font("Sans-Serif", Font.PLAIN, 50));
         currentSortingState.setForeground(Color.RED);
         for(String str:this.sortChoices) {
             sortCombo.addItem(str);
@@ -66,13 +69,16 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
         buttonOK.setText("Sort");
         buttonOK.addActionListener(this);
         sortCombo.addItemListener(this);
+        buttonGenerateNewShapes.addActionListener(this);
         this.upperPanel.add(sortCombo);
         this.upperPanel.add(sortDirLabel);
         this.upperPanel.add(sortDirCombo);
         this.upperPanel.add(buttonOK);  
         this.lowerPanel.add(currentSortingState);
+        this.muchLowerPanel.add(buttonGenerateNewShapes);
         this.add(upperPanel);
         this.add(lowerPanel);
+        this.add(muchLowerPanel);
     }
     public JPanel getControlPanel() {
         return this;
@@ -86,6 +92,10 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
             sortDirCombo.setSelectedIndex(chosenDirection == 0 ? 1:0);
             this.updateStateLabel(1);
         }
+        else if(e.getSource().equals(buttonGenerateNewShapes)){
+            this.updateStateLabel(0);
+            this.model.generateShapes();
+        }
     }
     @Override
     public void itemStateChanged(ItemEvent e){
@@ -98,6 +108,6 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
     //3 - sorted
     public void updateStateLabel(int state){
         this.currentSortingState.setText(this.sortStates[state]);
-        this.currentSortingState.setForeground(stateColors[state]);   
+        this.currentSortingState.setForeground(model.getView().getAvailableColors()[state]);   
     }
 }

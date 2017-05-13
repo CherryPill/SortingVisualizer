@@ -18,7 +18,22 @@ import java.awt.*;
 
 public class View extends JPanel{
     private final Model model;
-
+    private Color[] availableColors = {
+        Color.RED,
+        Color.ORANGE,
+        Color.GREEN,
+        Color.YELLOW,
+        Color.BLACK,
+        Color.CYAN,
+        Color.PINK
+    };
+    public int getMaxShapesColorNum(){
+        return this.availableColors.length;
+    }
+    public Color[] getAvailableColors() {
+        return availableColors;
+    }
+    
     public Model getModel() {
         return model;
     }
