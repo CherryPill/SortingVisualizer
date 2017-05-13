@@ -18,6 +18,10 @@ import java.awt.*;
 
 public class View extends JPanel{
     private final Model model;
+
+    public Model getModel() {
+        return model;
+    }
    
     public View(Model model) {
         this.model = model;

@@ -15,6 +15,13 @@ import java.awt.*;
  */
 public class mainFrame extends JFrame{
     private Model model;
+    private controlPanel cntrlPanel;
+    public controlPanel getCntrlPanel() {
+        return cntrlPanel;
+    }
+    public void setCntrlPanel(controlPanel cntrlPanel) {
+        this.cntrlPanel = cntrlPanel;
+    }
     public static int windowWidth = 800;
     public static int windowHeight = 200;
     private static double _getUserScreenWidth() {
@@ -35,11 +42,12 @@ public class mainFrame extends JFrame{
         this.model = model;
         this.setLayout(new GridLayout(1,2));
         this.getContentPane().add(model.getView());
-        this.getContentPane().add(new controlPanel(model));
+        this.cntrlPanel = new controlPanel(model);
+        this.getContentPane().add(cntrlPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
         setSize(windowWidth,windowHeight);
-        setResizable(false);
+        setResizable(true);
         double[] usrScreenDims = new double[2];
         mainFrame.centerWindow(usrScreenDims);
         setLocation((int)usrScreenDims[0], (int)usrScreenDims[1]);

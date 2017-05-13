@@ -8,6 +8,7 @@ package sortingVisualizer;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Theta1
@@ -15,14 +16,26 @@ import java.util.Random;
 public class QuickSort implements Runnable{
     ArrayList<Shape> shapes;
     int direction;
-    
-    public QuickSort(ArrayList<Shape> shapes, int direction) {
-            
+    View view;
+    private void pauseExecution(){
+                        view.revalidate();
+                           view.repaint();
+                         try{
+                               Thread.sleep(1000);
+                           }
+                           catch(InterruptedException e){
+                              JOptionPane.showMessageDialog(null, "Thread exception occurred", "Error", JOptionPane.OK_OPTION);
+                           }
+    }
+    public QuickSort(ArrayList<Shape> shapes, int direction, View view) {   
             this.shapes = shapes;
             this.direction = direction;
+            this.view = view;
         }
     public void run() {
             this.sort(0, this.shapes.size()-1);
+            this.view.getModel().getMvcFrame().getCntrlPanel().updateStateLabel(2);
+            
         }
     private void sort(int start, int end) {
             int q;
@@ -67,6 +80,7 @@ public class QuickSort implements Runnable{
                     Shape first = this.shapes.get(init);
                     Shape second = this.shapes.get(length);
                     new Swapper().swap(first, second);
+                    this.pauseExecution();
                     length--;
                     init++;
                 }
@@ -77,7 +91,7 @@ public class QuickSort implements Runnable{
                     Shape first = this.shapes.get(init);
                     Shape second = this.shapes.get(length);
                     new Swapper().swap(first, second);
-
+                    this.pauseExecution();
                     length--;
                     init++;
                 }
@@ -118,5 +132,7 @@ public class QuickSort implements Runnable{
                }
             }
         }
+        
+        
     }
 }

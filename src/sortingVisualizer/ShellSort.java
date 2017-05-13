@@ -6,6 +6,8 @@
 package sortingVisualizer;
 
 import java.util.ArrayList;
+import java.lang.InterruptedException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Theta1
@@ -14,12 +16,15 @@ import java.util.ArrayList;
 public class ShellSort implements Runnable{
     ArrayList<Shape> shapes;
     int direction;
-    public ShellSort(ArrayList<Shape> shapes, int direction) {
+    View view;
+    public ShellSort(ArrayList<Shape> shapes, int direction, View v) {
             this.direction = direction;
             this.shapes = shapes;
+            this.view = v;
         }
-    public void run() {
+    public void run(){
             this.sort();
+            this.view.getModel().getMvcFrame().getCntrlPanel().updateStateLabel(2);
         }
     public void sort() {
             int j;
@@ -31,6 +36,9 @@ public class ShellSort implements Runnable{
                            Shape first = this.shapes.get(j);
                            Shape second = this.shapes.get(j - gap);
                            new Swapper().swap(first, second);
+                        ;
+                           
+                           
                         }
                      }
                  else {
@@ -38,8 +46,20 @@ public class ShellSort implements Runnable{
                            Shape first = this.shapes.get(j);
                            Shape second = this.shapes.get(j - gap);
                            new Swapper().swap(first, second);
+                          
+                          
+                           
                         }
                      }
+                  view.revalidate();
+                           view.repaint();
+                         try{
+                               Thread.sleep(1000);
+                           }
+                           catch(InterruptedException e){
+                              JOptionPane.showMessageDialog(null, "Thread exception occurred", "Error", JOptionPane.OK_OPTION);
+                           }
+                           
                 }
             }
         }

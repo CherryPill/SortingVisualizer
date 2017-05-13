@@ -6,12 +6,16 @@
 package sortingVisualizer;
 
 import java.awt.Color;
+import java.lang.InterruptedException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 public class BubbleSort{
+    View view;
     ArrayList<Shape> shapes;
     public BubbleSort(ArrayList<Shape> shapes, View view) {
             this.shapes = shapes;
-        }
+            this.view = view;
+    }
     public void sort(int direction) {
             (new Thread() {
                 public void run() {
@@ -34,8 +38,19 @@ public class BubbleSort{
                                        }
                                 }
                             }
+                           view.revalidate();
+                           view.repaint();
+                         try{
+                               Thread.sleep(1000);
+                           }
+                           catch(InterruptedException e) {
+                              JOptionPane.showMessageDialog(null, "Thread exception occurred", "Error", JOptionPane.OK_OPTION);
+                           }
                         }
+                        view.getModel().getMvcFrame().getCntrlPanel().updateStateLabel(2);
+                        
                     }
-            }).start();     
+            }
+                    ).start();     
         }
 }

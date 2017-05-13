@@ -17,11 +17,15 @@ public class Model {
     private final Controller controller;
     private final View view;
     private final mainFrame mvcFrame;
+
+    public mainFrame getMvcFrame() {
+        return mvcFrame;
+    }
     private int shapesMargin = 10;
     private final int maxSize = 60;
     private final int minSize = 10;
     private final int constYOffset = 60;
-   
+    private final int constXOffset = 20;
     public void sortWrapper(int index, int direction) {
             switch(index) {
                 case 0: {
@@ -53,11 +57,11 @@ public class Model {
         int sentinel = 10;
     }
     public void Shellsort(int direction) {
-        Thread shellThread = new Thread(new ShellSort(this.shapes, direction));
+        Thread shellThread = new Thread(new ShellSort(this.shapes, direction, view));
         shellThread.start();
     }
     public void quickSort(int direction) {
-        Thread qsortThread = new Thread(new QuickSort(this.shapes, direction));
+        Thread qsortThread = new Thread(new QuickSort(this.shapes, direction, view));
         qsortThread.start();
     }
     public ArrayList<Shape> getAllShapes() {
@@ -73,11 +77,11 @@ public class Model {
     public Model() {
         int[] randomNumbers = this.generateRandomNumbers();
         shapes = new ArrayList<>();
-        shapes.add(new Square(0,constYOffset,randomNumbers[0],Color.CYAN));
-        shapes.add(new Square(maxSize+shapesMargin,constYOffset,randomNumbers[1],Color.RED));
-        shapes.add(new Square((maxSize+shapesMargin)*2,constYOffset,randomNumbers[2],Color.BLACK));
-        shapes.add(new Square((maxSize+shapesMargin)*3,constYOffset,randomNumbers[3],Color.GREEN));
-        shapes.add(new Square((maxSize+shapesMargin)*4,constYOffset,randomNumbers[4],Color.PINK));
+        shapes.add(new Square(constXOffset,constYOffset,randomNumbers[0],Color.CYAN));
+        shapes.add(new Square(maxSize+shapesMargin+constXOffset,constYOffset,randomNumbers[1],Color.RED));
+        shapes.add(new Square((maxSize+shapesMargin)*2+constXOffset,constYOffset,randomNumbers[2],Color.BLACK));
+        shapes.add(new Square((maxSize+shapesMargin)*3+constXOffset,constYOffset,randomNumbers[3],Color.GREEN));
+        shapes.add(new Square((maxSize+shapesMargin)*4+constXOffset,constYOffset,randomNumbers[4],Color.PINK));
         
         controller = new Controller(this);
         view = new View(this);

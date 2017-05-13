@@ -13,7 +13,7 @@ public class Square extends Shape
          this.xCoord = xCoord;
          this.yCoord = yCoord;
          this.size = size;
-         this.shapeColor = color;    
+         this.shapeColor = color;         
      }
      public Square(Square obj) {
             this.xCoord = obj.xCoord;
@@ -26,7 +26,6 @@ public class Square extends Shape
      }
      public int compareTo(Shape otherShape) { 
          if(this.size > otherShape.size) {
-       
              return 1;
          }
          else {
