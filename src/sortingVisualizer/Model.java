@@ -111,10 +111,9 @@ public class Model {
         view.repaint();
     }
     private int pickColor(int size){
-        int color = size % view.getMaxShapesColorNum();
-        while(isColorTaken(view.getAvailableColors()[color])){
+        int color = 0;
+        while(isColorTaken(view.getAvailableColors()[color=size % view.getMaxShapesColorNum()])){
             size+=10;
-            color = size % view.getMaxShapesColorNum();
         }
         return color;
     }
