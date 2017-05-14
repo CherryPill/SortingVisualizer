@@ -53,9 +53,8 @@ public class Model {
         new BubbleSort(this.shapes, view).sort(direction);
     }
     public void binaryTree(int direction) {
-        TreeSort ts = new TreeSort(this.shapes, direction);
-        ts.sort();
-        int sentinel = 10;
+        Thread treeThread = new Thread(new TreeSort(this.shapes, direction, view));
+        treeThread.start();
     }
     public void Shellsort(int direction) {
         Thread shellThread = new Thread(new ShellSort(this.shapes, direction, view));
@@ -91,7 +90,7 @@ public class Model {
             mvcFrame.windowHeight = height;
         }
     public void generateShapes(){
-        int[] randomNumbers = this.generateRandomNumbers();
+        int[] randomNumbers = {62, 59, 51, 34, 22};//this.generateRandomNumbers();
         shapes = new ArrayList<>();
         int currentColorIndex = 0;
         for(int x = 0;x<maxNumOfShapes;x++){

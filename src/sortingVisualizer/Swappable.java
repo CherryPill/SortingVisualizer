@@ -11,4 +11,5 @@ package sortingVisualizer;
  */
 public interface Swappable {
         public void swap(Shape one, Shape two);
+        public void Clone(Shape one, Shape two);
     }

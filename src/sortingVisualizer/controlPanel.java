@@ -86,11 +86,13 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(buttonOK)) {
+            this.updateStateLabel(1);
             int chosenSortAlgorithm = sortCombo.getSelectedIndex();
             int chosenDirection = sortDirCombo.getSelectedIndex();
+            
             this.model.sortWrapper(chosenSortAlgorithm, chosenDirection);
             sortDirCombo.setSelectedIndex(chosenDirection == 0 ? 1:0);
-            this.updateStateLabel(1);
+            
         }
         else if(e.getSource().equals(buttonGenerateNewShapes)){
             this.updateStateLabel(0);
