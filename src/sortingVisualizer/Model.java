@@ -90,7 +90,7 @@ public class Model {
             mvcFrame.windowHeight = height;
         }
     public void generateShapes(){
-        int[] randomNumbers = {62, 59, 51, 34, 22};//this.generateRandomNumbers();
+        int[] randomNumbers = this.generateRandomNumbers();
         shapes = new ArrayList<>();
         int currentColorIndex = 0;
         for(int x = 0;x<maxNumOfShapes;x++){
