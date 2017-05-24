@@ -29,16 +29,7 @@ public class TreeSort implements Runnable {
     //ascending order
     private void inOrder(Tree t){
         if(t != null) {
-            this.inOrder(t.left);
-            Shape temp1 = new Square((Square)this.shapes.get(foundCount));
-            Shape temp2 = new Square((Square)this.shapes.get(t.shape.shapeIndex));
-            new Swapper().swap(temp1, temp2);
-            this.shapes.set(foundCount, temp1);
-            this.shapes.set(t.shape.shapeIndex, temp2);
-            this.pauseExecution();
-            
-            TreeSort.foundCount++;
-            this.inOrder(t.right);
+            //stub
         }
     }
     public void run() {
@@ -47,10 +38,7 @@ public class TreeSort implements Runnable {
     }
     public void sort() {
         TreeSort.foundCount = 0;
-        
-        this.inOrder(mainTree);
-        
-        int sentinel = 0xf;
+        this.inOrder(mainTree);;
      }
      private void pauseExecution(){
                         view.revalidate();

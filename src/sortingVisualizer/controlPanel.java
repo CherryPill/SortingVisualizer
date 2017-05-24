@@ -35,8 +35,8 @@ public class controlPanel extends JPanel implements ActionListener, ItemListener
     String[] sortChoices = {
     "Shell's sort",
     "Quick sort",
-    "Bubble sort",
-    "Binary tree"
+    "Bubble sort"
+    //"Binary tree"
     };
     String[] sortStates = {
     "Unsorted",
